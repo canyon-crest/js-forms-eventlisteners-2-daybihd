@@ -17,6 +17,10 @@
 
 // STEP 1: Get the "Shout" button by its ID ("btnShout")
 //         using document.getElementById()
+document.getElementById("btnShout").addEventListener("click",function(){
+    outShout.innerHTML = shoutInput.value.toUpperCase()+"!";
+
+})
 
 // STEP 2: Add a click event listener to the button.
 //         Inside the listener function:
@@ -43,6 +47,65 @@
 // STEP 3: Get the "Calculate Total" button by ID ("btnCalc")
 //         Add a click event listener.
 //         Inside the listener:
+document.getElementById("btnCalc").addEventListener("click",function(){
+
+
+
+let sizes = document.getElementsByName("rg");
+let selected = 0;
+for (i=0;i<sizes.length;i++){
+    if(sizes[i].checked){
+        selected = parseFloat(sizes[i].value);
+    }
+
+}
+
+
+
+
+
+
+let count = 0;
+
+let toppings = document.getElementsByName("cb");
+for(i=0;i<toppings.length;i++){
+    if(toppings[i].checked){
+        count=count+1;
+        
+    }
+}
+count=count*0.5;
+
+
+
+
+
+
+
+let serviceFee=0;
+let service = document.getElementById("serviceSelect").value;
+if(service == "dinein"){
+serviceFee=serviceFee+0;
+}
+else if(service=="takeout"){
+    serviceFee=serviceFee+1.5;
+}
+else{
+    serviceFee=serviceFee+3;
+}
+let total = count+serviceFee+selected;
+
+
+
+let name = document.getElementById("myInput").value;
+if(name==""){
+    name="Customer";
+
+
+}
+myPara.innerHTML = name+", your total is $"+total.toFixed(2);
+
+})
 
 //   a) Get the selected size price:
 //      Use document.getElementsByName("rg") to get all
@@ -83,3 +146,15 @@
 //         c) Uncheck ALL topping checkboxes (loop through them)
 //         d) Set the service dropdown value to "dinein"
 //         e) Set the output paragraph innerHTML to ""
+document.getElementById("clearBtn").addEventListener("click",function(){
+    document.getElementById("r3").checked=true;
+    document.getElementById("myInput").value="";
+    document.getElementById("serviceSelect").value="dinein";
+    document.getElementById("myPara").innerHTML="";
+    
+    let toppings2=document.getElementsByName("cb");
+    for(i=0;i<toppings2.length;i++){
+        toppings2[i].checked = false;
+    }
+
+})
